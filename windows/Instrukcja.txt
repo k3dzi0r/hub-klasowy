@@ -1,0 +1,67 @@
+﻿HUB KLASOWY - INSTRUKCJA (Windows)
+==================================
+
+URUCHAMIANIE
+- Pierwszy raz: kliknij dwa razy "Zainstaluj na pulpicie.bat".
+  Na pulpicie pojawi sie skrot "Hub klasowy" z ikona. Program zapyta tez,
+  czy uruchamiac hub automatycznie po zalogowaniu do Windows.
+- Potem uruchamiaj hub skrotem z pulpitu (albo plikiem "Uruchom hub klasowy.bat").
+- Aplikacja otworzy sie w przegladarce Edge na calym ekranie.
+  F11 - wyjscie z pelnego ekranu / powrot do niego.  Alt+F4 - zamkniecie okna.
+- Nic nie trzeba instalowac. Potrzebny jest tylko internet dla pogody.
+- Po przeniesieniu folderu "Hub klasowy" w inne miejsce uruchom
+  "Zainstaluj na pulpicie.bat" jeszcze raz.
+- Autostart wylaczysz, usuwajac skrot "Hub klasowy" z folderu shell:startup (Win+R).
+
+OBRAZY, MUZYKA I DZWIEKI NATURY
+- Wrzuc plik do folderu:
+    relaks\obrazy   - jpg, png, webp (najlepiej poziome)
+    relaks\muzyka   - mp3, m4a, ogg, wav (graja po kolei)
+    relaks\natura   - mp3, m4a, ogg, wav (nagranie sie zapetla)
+- Wejdz ponownie w "Muzyka i relaks" - nowy plik bedzie na liscie.
+- Nazwa pliku to tytul. Liczba na poczatku ustala kolejnosc:
+    "05 Szum lasu.mp3" pokaze sie jako "Szum lasu".
+- Zeby cos usunac, usun plik z folderu.
+
+PIERWSZE URUCHOMIENIE / KLASY
+- Aplikacja startuje pusta: bez uczniow, z przykladowym planem dnia.
+- Ustawienia (zebatka): nazwa klasy, miejscowosc do pogody, uczniowie ze zdjeciami,
+  plan dnia, komunikaty, dyzury.
+- Kilka klas w jednej sali: kliknij nazwe klasy w lewym gornym rogu > Nowa klasa.
+  Kazda klasa ma swoich uczniow, plan, komunikaty i galerie.
+
+GDZIE SA MOJE DANE
+- W folderze "dane" obok tego pliku:
+    klasy.json          - lista klas
+    klasa-....json      - dane klasy (uczniowie, plan, komunikaty, dyzury, podpisy zdjec)
+    galeria\klasa-...\  - zdjecia galerii tej klasy (zwykle pliki JPG/PNG)
+- Zdjecia mozna tez wrzucic recznie do folderu galerii klasy - pokaza sie w Galerii
+  (tytul z nazwy pliku, kategoria "Inne"; podpis zmienisz w podgladzie zdjecia).
+- Zdjecia uczniow pokazuja sie w Galerii same, w kategorii "Uczniowie".
+
+KOPIE AUTOMATYCZNE
+- Przy pierwszej zmianie danego dnia poprzednia wersja pliku klasy trafia do dane\kopie\RRRR-MM-DD.
+  Usuniete zdjecia tez tam trafiaja.
+- Kopie starsze niz 30 dni kasuja sie same.
+- Gdy cos zniknie przez pomylke: zatrzymaj hub i skopiuj plik z kopii z powrotem do "dane"
+  (zdjecie - do dane\galeria\klasa-...).
+- Kopia calosci / przeniesienie na inny komputer: skopiuj caly folder "dane".
+- Jedna klasa do pliku: Ustawienia > Dane i kopia > "Pobierz kopie danych" (razem ze zdjeciami galerii);
+  na innym komputerze: "Wczytaj jako nowa klase".
+
+UDOSTEPNIANIE INNYM NAUCZYCIELOM
+- Kliknij dwa razy "Udostepnij pusta aplikacje.bat".
+  Na pulpicie powstanie "Hub klasowy - pusta aplikacja.zip" - BEZ folderu "dane".
+- Nigdy nie przekazuj folderu "dane" ani plikow kopii: sa w nich imiona, zdjecia i urodziny uczniow.
+
+AKTUALIZACJA APLIKACJI
+1. Uruchom "Zatrzymaj hub klasowy.bat".
+2. Podmien folder "aplikacja" (i ewentualnie pliki .bat / serwer.ps1) na nowe.
+   Folderow "dane" i "relaks" nie ruszaj.
+3. Uruchom hub ponownie.
+
+GDY COS NIE DZIALA
+- "Nie udalo sie uruchomic huba": sprawdz, czy obok pliku .bat sa folder "aplikacja" i plik serwer.ps1.
+- Zablokowany plik z pendrive'a / maila: prawy przycisk na serwer.ps1 > Wlasciwosci > zaznacz "Odblokuj".
+- Pusta pogoda: brak internetu - reszta dziala normalnie.
+- Nie slychac dzwonka: po uruchomieniu huba dotknij raz ekranu (przegladarka gra dzwieki dopiero po pierwszym dotknieciu). Sprawdz tez przycisk z dzwonkiem obok zegara (czerwony = wyciszony) i glosnosc komputera.
