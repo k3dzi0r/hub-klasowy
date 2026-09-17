@@ -7,7 +7,7 @@ import { students } from '../data/students'
 import { tasks } from '../data/tasks'
 
 // Wersja demo (GitHub Pages, `vite build --mode demo`) startuje z przykładową klasą zamiast pustej.
-const isDemo = import.meta.env.MODE === 'demo'
+export const isDemo = import.meta.env.MODE === 'demo'
 import { titleFromFileName } from '../data/relaxMedia'
 import type { AppData, ScheduleItem, WeekSchedule, Weekday } from '../types'
 import { inlineGallery } from './galleryFiles'

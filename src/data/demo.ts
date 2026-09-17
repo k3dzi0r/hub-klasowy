@@ -3,6 +3,9 @@ import type { ClassEvent, ClassTask, GalleryItem, Student, WeatherLocation } fro
 // Dane pokazowe do wersji demo (GitHub Pages) — zmyśleni uczniowie, żadnych prawdziwych osób.
 // Zdjęcia: wrzuć wygenerowane obrazy do public/demo-photos/ pod tymi samymi nazwami plików.
 
+// Podbij przy każdej zmianie danych demo — wymusza odświeżenie u odwiedzających, którzy mają starą wersję zapisaną w przeglądarce.
+export const DEMO_VERSION = 3
+
 export const demoWeatherLocation: WeatherLocation = { name: 'Toruń', latitude: 53.0138, longitude: 18.6058 }
 
 export const demoStudents: Student[] = [

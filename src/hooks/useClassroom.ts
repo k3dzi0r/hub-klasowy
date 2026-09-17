@@ -1,12 +1,24 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { createDefaultData, normalizeData, STORAGE_KEY, withScheduleActivity } from '../lib/appData'
+import { DEMO_VERSION } from '../data/demo'
+import { createDefaultData, isDemo, normalizeData, STORAGE_KEY, withScheduleActivity } from '../lib/appData'
 import { deleteGalleryFolder } from '../lib/galleryFiles'
 import { newId } from '../lib/images'
-import { browserStorage, getStorageInfo, storage } from '../lib/storage'
+import { browserStorage, clearBrowserStorage, getStorageInfo, storage } from '../lib/storage'
 import type { AppData } from '../types'
 
 export type ClassSummary = { id: string; name: string }
 export type ClassIndex = { activeId: string; classes: ClassSummary[] }
+
+const DEMO_VERSION_KEY = 'demo-version'
+
+/** Wersja demo (GitHub Pages) starsza niż aktualna: czyści przeglądarkę, żeby odwiedzający dostał świeże dane zamiast starych z poprzedniej wizyty. */
+async function resetStaleDemo() {
+  if (!isDemo) return
+  const savedVersion = await browserStorage.get<number>(DEMO_VERSION_KEY).catch(() => undefined)
+  if (savedVersion === DEMO_VERSION) return
+  await clearBrowserStorage().catch(() => undefined)
+  await browserStorage.set(DEMO_VERSION_KEY, DEMO_VERSION).catch(() => undefined)
+}
 
 const INDEX_KEY = 'classes-index'
 const classKey = (id: string) => `class:${id}`
@@ -83,6 +95,7 @@ export function useClassroom() {
     let active = true
     void (async () => {
       try {
+        await resetStaleDemo()
         let loadedIndex = await storage.get<ClassIndex>(INDEX_KEY)
         if (!loadedIndex?.classes.length) loadedIndex = await migrateExistingData()
         const saved = await storage.get<AppData>(classKey(loadedIndex.activeId))

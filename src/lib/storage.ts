@@ -43,6 +43,9 @@ export const browserStorage: Store = {
   remove: (key) => runIdb('readwrite', (store) => store.delete(key)).then(() => undefined),
 }
 
+// Czyści całą przeglądarkową bazę — używane tylko do odświeżenia wersji demo (patrz src/data/demo.ts).
+export const clearBrowserStorage = () => runIdb('readwrite', (store) => store.clear()).then(() => undefined)
+
 /* ---------- Folder „dane” przez lokalny serwer ---------- */
 
 const fileName = (key: string) => {
