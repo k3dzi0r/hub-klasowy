@@ -9,7 +9,7 @@ export const demoStudents: Student[] = [
   { id: 1, name: 'Kuba', fullName: 'Kuba Nowak', photo: 'demo-photos/kuba.png', present: true, birthday: '03-14' },
   { id: 2, name: 'Ola', fullName: 'Ola Kowalska', photo: 'demo-photos/ola.png', present: true, birthday: '09-02' },
   { id: 3, name: 'Bartek', fullName: 'Bartek Zieliński', photo: 'demo-photos/bartek.png', present: true, birthday: '06-30' },
-  { id: 4, name: 'Grzesia', fullName: 'Grzesia Wiśniewska', photo: 'demo-photos/zosia.png', present: false, birthday: '11-20' },
+  { id: 4, name: 'Grześ', fullName: 'Grześ Wiśniewski', photo: 'demo-photos/zosia.png', present: false, birthday: '11-20' },
 ]
 
 export const demoTasks: ClassTask[] = [
