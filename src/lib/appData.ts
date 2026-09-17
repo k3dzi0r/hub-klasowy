@@ -1,5 +1,5 @@
 import { announcements } from '../data/announcements'
-import { demoEvents, demoGallery, demoStudents, demoTasks } from '../data/demo'
+import { demoEvents, demoGallery, demoStudents, demoTasks, demoWeatherLocation } from '../data/demo'
 import { events } from '../data/events'
 import { galleryItems } from '../data/gallery'
 import { schedule } from '../data/schedule'
@@ -83,7 +83,7 @@ function normalizeWeekSchedule(saved: Partial<Record<Weekday, ScheduleItem[]>> |
 export function createDefaultData(): AppData {
   return withScheduleActivity({
     classInfo: { name: 'Nasza klasa', tagline: 'Małe kroki, wielkie możliwości!' },
-    weatherLocation: null,
+    weatherLocation: isDemo ? demoWeatherLocation : null,
     students: isDemo ? demoStudents : students,
     weekSchedule: sameForWholeWeek(schedule),
     events: isDemo ? demoEvents : events,

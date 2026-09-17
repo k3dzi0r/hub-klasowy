@@ -1,14 +1,15 @@
-import type { ClassEvent, ClassTask, GalleryItem, Student } from '../types'
+import type { ClassEvent, ClassTask, GalleryItem, Student, WeatherLocation } from '../types'
 
 // Dane pokazowe do wersji demo (GitHub Pages) — zmyśleni uczniowie, żadnych prawdziwych osób.
 // Zdjęcia: wrzuć wygenerowane obrazy do public/demo-photos/ pod tymi samymi nazwami plików.
+
+export const demoWeatherLocation: WeatherLocation = { name: 'Toruń', latitude: 53.0138, longitude: 18.6058 }
 
 export const demoStudents: Student[] = [
   { id: 1, name: 'Kuba', fullName: 'Kuba Nowak', photo: 'demo-photos/kuba.png', present: true, birthday: '03-14' },
   { id: 2, name: 'Ola', fullName: 'Ola Kowalska', photo: 'demo-photos/ola.png', present: true, birthday: '09-02' },
   { id: 3, name: 'Bartek', fullName: 'Bartek Zieliński', photo: 'demo-photos/bartek.png', present: true, birthday: '06-30' },
-  // Zosia jest dziś nieobecna — stąd bez zdjęcia (inicjały).
-  { id: 4, name: 'Zosia', fullName: 'Zosia Wiśniewska', photo: '', present: false, birthday: '11-20' },
+  { id: 4, name: 'Zosia', fullName: 'Zosia Wiśniewska', photo: 'demo-photos/zosia.png', present: false, birthday: '11-20' },
 ]
 
 export const demoTasks: ClassTask[] = [
