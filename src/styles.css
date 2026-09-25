@@ -268,14 +268,17 @@ button.weather-card { font: inherit; text-align: left; cursor: pointer; }
 .next .activity-eyebrow { background: var(--next); }
 .activity-body { flex: 1; min-height: 0; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: safe center; gap: 6px; margin: 8px; padding: 10px 12px 14px; border-radius: 16px; background: linear-gradient(180deg, rgba(226, 255, 239, .78), rgba(255, 255, 255, .55)); }
 .next .activity-body { background: linear-gradient(180deg, rgba(223, 241, 255, .82), rgba(255, 255, 255, .55)); }
-/* Ikona zajmuje miejsce, które zostaje po tytule i godzinie — rozmiar liczony od własnej wysokości, więc nie wychodzi poza kartę. */
-.activity-icon { --icon-max: 8.5rem; flex: 1 1 0; min-height: 0; max-height: calc(var(--icon-max) * 1.1); width: 100%; container-type: size; display: grid; place-items: center; filter: drop-shadow(0 8px 12px rgba(20, 60, 110, .2)); }
+/* Ikona ma zawsze co najmniej ~45% karty, resztę dzieli z tekstem; rozmiar liczony od własnej wysokości, więc nie wychodzi poza kartę. */
+.activity-icon { --icon-max: 8.5rem; flex: 1 0 0; min-height: 40%; max-height: calc(var(--icon-max) * 1.1); width: 100%; container-type: size; display: grid; place-items: center; filter: drop-shadow(0 8px 12px rgba(20, 60, 110, .2)); }
 .activity-icon > span { font-size: min(var(--icon-max), 86cqb, 60cqi); line-height: 1; }
 .activity-card.current .activity-icon { animation: gentleAttention 4.5s ease-in-out infinite; }
 @keyframes gentleAttention { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); } }
-.activity-card strong { max-width: 100%; font-size: clamp(.85rem, 11.5cqi, 1.9rem); line-height: 1.08; letter-spacing: -.02em; }
+.activity-card strong { max-width: 100%; font-size: clamp(.85rem, min(11.5cqi, 12cqb), 1.9rem); line-height: 1.08; letter-spacing: -.02em; }
 .activity-time { display: inline-flex; margin-top: 4px; padding: 5px 10px; border-radius: 10px; color: var(--ink); background: rgba(255,255,255,.7); font-size: clamp(.72rem, 5cqi, .95rem); font-weight: 800; font-variant-numeric: tabular-nums; }
 .activity-card small { max-width: 24ch; color: var(--ink-soft); font-size: clamp(.72rem, 5.2cqi, 1rem); line-height: 1.35; }
+/* Niska karta: najpierw znika opis, potem godzina — ikona i nazwa zostają. */
+@container (max-height: 300px) { .activity-card small { display: none; } }
+@container (max-height: 220px) { .activity-time { display: none; } }
 .now-next-arrow { display: grid; place-items: center; }
 .now-next-arrow svg { width: 46px; height: 46px; padding: 9px; border-radius: 50%; color: var(--ink); background: rgba(255,255,255,.95); box-shadow: 0 0 0 3px rgba(255,255,255,.45), 0 8px 18px rgba(var(--shadow-rgb), .3); stroke-width: 3; }
 
