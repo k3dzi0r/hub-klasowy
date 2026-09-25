@@ -2,6 +2,10 @@
 ==================================
 
 URUCHAMIANIE
+- Z instalatora (Hub-klasowy-setup.exe): hub trafia do Dokumenty\Hub klasowy,
+  skrot jest na pulpicie i w menu Start. Aktualizacja: uruchom nowszy instalator
+  - foldery "dane" i "relaks" zostaja. Ponizsze punkty o "Zainstaluj na pulpicie.bat"
+  dotycza wersji z ZIP-a.
 - Pierwszy raz: kliknij dwa razy "Zainstaluj na pulpicie.bat".
   Na pulpicie pojawi sie skrot "Hub klasowy" z ikona. Program zapyta tez,
   czy uruchamiac hub automatycznie po zalogowaniu do Windows.
