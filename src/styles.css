@@ -266,9 +266,11 @@ button.weather-card { font: inherit; text-align: left; cursor: pointer; }
 .activity-card:disabled { cursor: default; }
 .activity-eyebrow { flex: 0 0 auto; display: block; padding: 9px 8px 10px; color: #fff; background: var(--now); font-size: clamp(1.05rem, 1.25vw, 1.4rem); font-weight: 800; letter-spacing: .01em; }
 .next .activity-eyebrow { background: var(--next); }
-.activity-body { flex: 1; min-height: 0; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; margin: 8px; padding: 10px 12px 14px; border-radius: 16px; background: linear-gradient(180deg, rgba(226, 255, 239, .78), rgba(255, 255, 255, .55)); }
+.activity-body { flex: 1; min-height: 0; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: safe center; gap: 6px; margin: 8px; padding: 10px 12px 14px; border-radius: 16px; background: linear-gradient(180deg, rgba(226, 255, 239, .78), rgba(255, 255, 255, .55)); }
 .next .activity-body { background: linear-gradient(180deg, rgba(223, 241, 255, .82), rgba(255, 255, 255, .55)); }
-.activity-icon { display: block; font-size: clamp(3.2rem, min(13vh, 52cqi, 42cqb), 8.5rem); line-height: 1.05; filter: drop-shadow(0 8px 12px rgba(20, 60, 110, .2)); }
+/* Ikona zajmuje miejsce, które zostaje po tytule i godzinie — rozmiar liczony od własnej wysokości, więc nie wychodzi poza kartę. */
+.activity-icon { --icon-max: 8.5rem; flex: 1 1 0; min-height: 0; max-height: calc(var(--icon-max) * 1.1); width: 100%; container-type: size; display: grid; place-items: center; filter: drop-shadow(0 8px 12px rgba(20, 60, 110, .2)); }
+.activity-icon > span { font-size: min(var(--icon-max), 86cqb, 60cqi); line-height: 1; }
 .activity-card.current .activity-icon { animation: gentleAttention 4.5s ease-in-out infinite; }
 @keyframes gentleAttention { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); } }
 .activity-card strong { max-width: 100%; font-size: clamp(.85rem, 11.5cqi, 1.9rem); line-height: 1.08; letter-spacing: -.02em; }
@@ -400,7 +402,7 @@ button.weather-card { font: inherit; text-align: left; cursor: pointer; }
 .now-next-fullscreen .activity-card { border-width: 5px; border-radius: 30px; }
 .now-next-fullscreen .activity-eyebrow { padding: 14px; font-size: clamp(1.6rem, 2.4vw, 2.6rem); }
 .now-next-fullscreen .activity-body { margin: 14px; border-radius: 22px; gap: 14px; }
-.now-next-fullscreen .activity-icon { font-size: clamp(7rem, min(22vh, 40cqi, 42cqb), 13rem); }
+.now-next-fullscreen .activity-icon { --icon-max: 13rem; }
 .now-next-fullscreen .activity-card strong { font-size: clamp(2rem, 9cqi, 4.2rem); }
 .now-next-fullscreen .activity-time { font-size: clamp(1rem, 3.4cqi, 1.4rem); padding: 8px 16px; }
 .now-next-fullscreen .activity-card small { max-width: 28ch; font-size: clamp(1rem, 3.6cqi, 1.4rem); line-height: 1.4; }
@@ -769,7 +771,7 @@ button.weather-card { font: inherit; text-align: left; cursor: pointer; }
   .topbar { height: auto; min-height: 88px; gap: 10px; padding: 12px; }.mobile-menu { width: 48px; height: 48px; }.clock { min-width: 0; margin-right: auto; }.clock strong { font-size: 2.4rem; }.clock span { max-width: 190px; font-size: .68rem; }.weather-card, .topbar-home .weather-card { min-width: 0; width: auto; display: flex; gap: 8px; margin-left: 0; padding: 9px 12px; }.weather-card .weather-icon { font-size: 1.8rem; }.weather-main span, .weather-details { display: none; }.weather-main strong { font-size: 1.2rem; }.teacher-shortcut { display: none; }.page-title > button { display: none; }.page-title span { display: none; }.page-title h1 { font-size: 1.4rem; }
   .view-stage { padding: 12px; }.dashboard { display: block; }.dashboard > * { margin-bottom: 12px; }.dashboard-primary { display: block; }.dashboard-primary > * { margin-bottom: 12px; }.student-grid { grid-template-columns: repeat(2,1fr); }.dashboard-focus-row { grid-template-columns: 1fr; min-height: 0; }.dashboard-focus-row .now-next { min-height: 280px; }.dashboard-focus-row .timer-panel { display: none; }.dashboard-side { display: block; }.dashboard-side > * { margin-bottom: 12px; }.schedule-preview { display: none; }.mood-mini { min-height: 150px; }
   .schedule-detail, .calendar-side { display: grid; grid-template-columns: 1fr; }.large-schedule { padding: 10px; }.large-schedule .schedule-list button { grid-template-columns: 52px 35px minmax(0,1fr) auto; min-height: 58px; padding: 6px; }.large-schedule .done-icon { display: none; }.large-schedule .now-chip { grid-column: auto; }.large-schedule .schedule-list strong { font-size: .82rem; }.date-strip { align-items: flex-start; flex-direction: column; gap: 4px; }
-  .now-next-view { display: block; }.now-next-fullscreen { min-height: 0; display: grid; grid-template-columns: 1fr; }.now-next-fullscreen .now-next-arrow { transform: rotate(90deg); height: 42px; }.now-next-fullscreen .activity-card { min-height: 310px; }.now-next-fullscreen .activity-icon { font-size: 5rem; }.now-next-progress { margin: 12px 0; }.now-next-view > .timer-panel { margin-top: 12px; }
+  .now-next-view { display: block; }.now-next-fullscreen { min-height: 0; display: grid; grid-template-columns: 1fr; }.now-next-fullscreen .now-next-arrow { transform: rotate(90deg); height: 42px; }.now-next-fullscreen .activity-card { min-height: 310px; }.now-next-fullscreen .activity-icon { --icon-max: 5rem; }.now-next-progress { margin: 12px 0; }.now-next-view > .timer-panel { margin-top: 12px; }
   .calendar-panel { padding: 10px; }.calendar-toolbar h2 { font-size: 1.3rem; }.calendar-toolbar button { min-width: 42px; height: 42px; }.calendar-toolbar .today-button { padding-inline: 13px; }.calendar-grid { gap: 3px; }.calendar-grid.days { grid-auto-rows: 54px; }.calendar-grid.days button { padding: 6px; border-radius: 10px; font-size: .8rem; }.calendar-grid.days button.today::after { display: none; }
   .duty-panel, .rules-panel { padding: 13px; }.duty-list > button { grid-template-columns: 48px minmax(0,1fr) 38px; min-height: 82px; padding: 8px; }.duty-list > button > strong { font-size: .9rem; }.assignee-group { grid-column: 2; }.assignee-group img { width: 34px; height: 34px; }.task-check { grid-column: 3; grid-row: 1 / 3; }
   .gallery-upload { display: grid; grid-template-columns: 1fr 1.25fr; }.gallery-grid { grid-template-columns: repeat(2,1fr); }.filter-pills { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 5px; }.lightbox { grid-template-columns: 42px minmax(0,1fr) 42px; gap: 6px; padding: 70px 8px 20px; }.lightbox > button { width: 42px; height: 42px; }.lightbox .lightbox-close { top: 12px; right: 12px; }
@@ -853,7 +855,7 @@ button.weather-card { font: inherit; text-align: left; cursor: pointer; }
 
   .activity-eyebrow { padding: 6px 8px 7px; font-size: clamp(.95rem, 2.2vh, 1.3rem); }
   .activity-body { margin: 6px; padding: 6px 10px 10px; gap: 4px; }
-  .activity-icon { font-size: clamp(2.8rem, min(10vh, 30cqi, 40cqb), 5.4rem); }
+  .activity-icon { --icon-max: 5.4rem; }
   .now-next { grid-template-columns: minmax(0, 1fr) 52px minmax(0, 1fr); }
 
   .compact-list { gap: 4px; }

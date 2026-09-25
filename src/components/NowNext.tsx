@@ -13,7 +13,7 @@ function ActivityCard({ activity, kind, onOpen }: { activity: ScheduleItem; kind
     <button className={`activity-card ${kind}`} onClick={onOpen} disabled={!onOpen}>
       <span className="activity-eyebrow">{kind === 'current' ? 'Teraz' : 'Potem'}</span>
       <span className="activity-body">
-        <span className="activity-icon" aria-hidden="true">{activity.icon}</span>
+        <span className="activity-icon" aria-hidden="true"><span>{activity.icon}</span></span>
         <strong>{activity.shortTitle}</strong>
         {activity.instruction && <small>{activity.instruction}</small>}
         <span className="activity-time">{activity.time}–{activity.endTime}</span>
