@@ -1,10 +1,26 @@
 name: Windows package
 
+# Każda zmiana aplikacji na master (albo ręczne uruchomienie) publikuje nowy Release
+# z instalatorem i ZIP-em. Stały link do najnowszego instalatora:
+# https://github.com/k3dzi0r/hub-klasowy/releases/latest/download/Hub-klasowy-setup.exe
 on:
   workflow_dispatch:
   push:
-    tags:
-      - 'v*'
+    branches: [master]
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'windows/**'
+      - 'scripts/**'
+      - 'index.html'
+      - 'vite.config.ts'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/windows-package.yml'
+
+concurrency:
+  group: windows-package
+  cancel-in-progress: false
 
 jobs:
   package-windows:
@@ -23,6 +39,13 @@ jobs:
 
       - run: npm run pakiet:windows
 
+      - name: Numer wersji
+        id: wersja
+        shell: pwsh
+        run: |
+          $base = ((Get-Content package.json | ConvertFrom-Json).version -split '\.')[0..1] -join '.'
+          "version=$base.${{ github.run_number }}" >> $env:GITHUB_OUTPUT
+
       - name: Spakuj do ZIP
         shell: pwsh
         run: 7z a -tzip "release/Hub-klasowy-windows.zip" "./release/Hub klasowy"
@@ -32,24 +55,17 @@ jobs:
         run: |
           $iscc = 'C:\Program Files (x86)\Inno Setup 6\ISCC.exe'
           if (-not (Test-Path $iscc)) { choco install innosetup -y --no-progress }
-          $version = if ('${{ github.ref_type }}' -eq 'tag') { '${{ github.ref_name }}'.TrimStart('v') } else { (Get-Content package.json | ConvertFrom-Json).version }
-          & $iscc "/DAppVersion=$version" scripts/instalator-windows.iss
+          & $iscc "/DAppVersion=${{ steps.wersja.outputs.version }}" scripts/instalator-windows.iss
           if ($LASTEXITCODE) { exit $LASTEXITCODE }
 
-      # Ręczne uruchomienie: instalator i ZIP do pobrania jako artefakty workflow.
-      - uses: actions/upload-artifact@v4
+      - uses: softprops/action-gh-release@v2
         with:
-          name: hub-klasowy-windows
-          path: |
-            release/Hub-klasowy-setup.exe
-            release/Hub-klasowy-windows.zip
-
-      # Tag v*: instalator i ZIP dołączone do szkicu GitHub Release.
-      - if: startsWith(github.ref, 'refs/tags/')
-        uses: softprops/action-gh-release@v2
-        with:
-          name: Hub klasowy ${{ github.ref_name }}
-          draft: true
+          tag_name: v${{ steps.wersja.outputs.version }}
+          target_commitish: ${{ github.sha }}
+          name: Hub klasowy ${{ steps.wersja.outputs.version }}
+          body: 'Instalator: **Hub-klasowy-setup.exe**. Wersja bez instalacji: Hub-klasowy-windows.zip.'
+          generate_release_notes: true
+          make_latest: true
           files: |
             release/Hub-klasowy-setup.exe
             release/Hub-klasowy-windows.zip
